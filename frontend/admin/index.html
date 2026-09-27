@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Gwadar Cargo Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="navbar-brand">Gwadar Cargo Network</div>
+            <div class="navbar-user">
+                <span class="user-name">Admin User</span>
+                <span class="user-role">Admin</span>
+                <button class="logout-btn">Logout</button>
+            </div>
+        </nav>
+        
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <div class="sidebar-menu">
+                    <a href="#" class="sidebar-item active">
+                        <span class="sidebar-icon">📊</span>
+                        <span class="sidebar-label">Dashboard</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">📦</span>
+                        <span class="sidebar-label">Cargo Management</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">🚛</span>
+                        <span class="sidebar-label">Vehicles</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">👤</span>
+                        <span class="sidebar-label">Drivers</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">🚨</span>
+                        <span class="sidebar-label">Alerts</span>
+                    </a>
+                </div>
+            </aside>
+            
+            <main class="main-content">
+                <h1>Admin Dashboard</h1>
+                <p>Loading...</p>
+            </main>
+        </div>
+    </div>
+    
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/websocket.js"></script>
+    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/pages/admin/dashboard.js"></script>
+</body>
+</html>

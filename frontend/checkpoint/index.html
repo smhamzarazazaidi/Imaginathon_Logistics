@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkpoint Scanner - Gwadar Cargo Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+    <link rel="stylesheet" href="/static/css/checkpoint.css">
+</head>
+<body>
+    <div id="app">
+        <div class="checkpoint-scanner">
+            <div class="checkpoint-header">
+                <h1>Checkpoint CP-03</h1>
+                <p>Coastal Highway</p>
+            </div>
+            <div class="scanner-section">
+                <button class="scan-qr-btn">SCAN QR</button>
+            </div>
+            <div id="scan-result"></div>
+        </div>
+    </div>
+    
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/websocket.js"></script>
+    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/pages/checkpoint/scanner.js"></script>
+</body>
+</html>

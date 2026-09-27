@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port Officer - Gwadar Cargo Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+    <link rel="stylesheet" href="/static/css/port.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="navbar-brand">Gwadar Cargo Network</div>
+            <div class="navbar-user">
+                <span class="user-name">Port Officer</span>
+                <span class="user-role">Port Officer</span>
+                <button class="logout-btn">Logout</button>
+            </div>
+        </nav>
+        
+        <main class="main-content">
+            <div class="port-verification">
+                <div class="verification-header">
+                    <h1>Port Gate Verification</h1>
+                </div>
+                <div class="scanner-section">
+                    <button class="scan-qr-btn">Scan QR</button>
+                </div>
+                <div id="scan-result"></div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/websocket.js"></script>
+    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/pages/port/verification.js"></script>
+</body>
+</html>

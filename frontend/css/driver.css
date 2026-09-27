@@ -1,0 +1,140 @@
+.driver-app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--bg-secondary);
+}
+
+.driver-header {
+    background: var(--navy-primary);
+    color: var(--text-inverse);
+    padding: var(--space-6);
+    text-align: center;
+}
+
+.driver-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.active-journey {
+    flex: 1;
+    padding: var(--space-6);
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.active-journey h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-6);
+    color: var(--text-primary);
+}
+
+.journey-route {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--space-6);
+}
+
+.route-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.point-name {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-md);
+    background: var(--bg-primary);
+    border: 2px solid var(--bg-tertiary);
+    z-index: 2;
+}
+
+.route-point.completed .point-name {
+    background: var(--success-light);
+    border-color: var(--success);
+    color: var(--success-dark);
+}
+
+.route-point.current .point-name {
+    background: var(--accent-light);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.point-check {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--success);
+    margin-top: var(--space-2);
+}
+
+.route-line {
+    width: 4px;
+    height: 40px;
+    background: var(--bg-tertiary);
+    margin: var(--space-2) 0;
+}
+
+.route-point.completed + .route-point .route-line,
+.route-point.current + .route-point .route-line {
+    background: var(--accent-primary);
+}
+
+.journey-info {
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    border: 1px solid var(--bg-tertiary);
+    margin-bottom: var(--space-6);
+}
+
+.journey-info p {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+}
+
+.journey-info p:last-child {
+    margin-bottom: 0;
+}
+
+.journey-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.no-journey {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+}
+
+.no-journey h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+}
+
+.no-journey p {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+}
