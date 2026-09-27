@@ -1,16 +1,19 @@
 from __future__ import annotations
 import os
 import hashlib
+import io
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
+import qrcode
+from qrcode.image.svg import SvgPathImage
 
 load_dotenv()
 ROOT = Path(__file__).resolve().parent.parent
@@ -84,6 +87,11 @@ async def lifespan(_):
 
 app=FastAPI(title="Gwadar Smart Cargo Network",version="1.0.0",lifespan=lifespan)
 app.add_middleware(CORSMiddleware,allow_origins=["*"],allow_credentials=True,allow_methods=["*"],allow_headers=["*"])
+@app.middleware("http")
+async def fresh_frontend_assets(request:Request,call_next):
+ response=await call_next(request)
+ if request.url.path.startswith("/static/") and (request.url.path.endswith((".js",".css",".svg",".html"))): response.headers["Cache-Control"]="no-store, no-cache, must-revalidate"
+ return response
 app.mount("/static",StaticFiles(directory=str(FRONTEND)),name="static")
 
 class CargoCreate(BaseModel):
@@ -96,6 +104,14 @@ class DriverReport(BaseModel): message:str=Field(min_length=3,max_length=300)
 async def home(): return FileResponse(FRONTEND/"index.html")
 @app.get("/health")
 async def health(): return {"status":"healthy","database":"mongodb" if store.collection is not None else "demo-memory"}
+@app.get("/api/qr/{cargo_id}")
+async def cargo_qr(cargo_id:str,request:Request):
+ item=await store.find(cargo_id)
+ if not item: raise HTTPException(404,"Cargo ID not found")
+ target=f'{str(request.base_url).rstrip("/")}/static/driver/index.html?cargoId={item["id"]}'
+ code=qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H,box_size=8,border=4); code.add_data(target); code.make(fit=True)
+ image=code.make_image(image_factory=SvgPathImage); output=io.BytesIO(); image.save(output)
+ return Response(output.getvalue(),media_type="image/svg+xml",headers={"Cache-Control":"no-cache"})
 @app.get("/api/cargo")
 async def cargo_list(): return [enrich(x) for x in await store.all()]
 @app.get("/api/cargo/{cargo_id}")
